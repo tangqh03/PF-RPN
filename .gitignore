@@ -1,0 +1,11 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg
+*.egg-info
+
+# Exclude data, checkpoints, and work directories
+work_dirs/
+checkpoints/
+data/
