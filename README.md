@@ -1,4 +1,4 @@
-# 🚀 PF-RPN: Prompt-Free Universal Region Proposal Network (CVPR 2026)
+# 🚀 [PF-RPN: Prompt-Free Universal Region Proposal Network (CVPR 2026)](https://arxiv.org/abs/2603.17554)
 
 <div align="center">
 <br>
@@ -14,6 +14,8 @@
 
 <sup>1</sup> Nanjing University,  <sup>2</sup> University of Science and Technology of China
 </br>
+[![HuggingFace](https://img.shields.io/badge/Hugging%20Face-Dataset%20&%20Models-yellow?logo=huggingface)](https://huggingface.co/tangqh/PF-RPN)
+[![Arxiv](https://img.shields.io/badge/arXiv-Paper%20Available-b31b1b)](https://arxiv.org/abs/2603.17554)
 [![Codebase](https://img.shields.io/badge/Base-MMDetection%203.3.0-blue)](https://github.com/open-mmlab/mmdetection)
 [![Python](https://img.shields.io/badge/Python-3.10-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.1.0-EE4C2C?logo=pytorch&logoColor=white)](https://pytorch.org/)
