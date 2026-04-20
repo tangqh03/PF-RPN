@@ -356,10 +356,10 @@ Before reporting numbers, verify:
 
 If you find PF-RPN is useful in your research or applications, please consider giving us a star 🌟 and citing it.
 ```bibtex
-@inproceedings{tang2026pf,
+@article{tang2026prompt,
   title={Prompt-Free Universal Region Proposal Network},
   author={Tang, Qihong and Liu, Changhan and Zhang, Shaofeng and Li, Wenbin and Fan, Qi and Gao, Yang},
-  booktitle={Proceedings of the IEEE conference on computer vision and pattern recognition},
+  journal={arXiv preprint arXiv:2603.17554},
   year={2026}
 }
 ```
