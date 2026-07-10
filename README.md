@@ -150,20 +150,54 @@ Datasets are not bundled in this repository. Please prepare all data under `data
 
 ### A) Source-domain training data (COCO 2017 + ImageNet)
 
-Download from [COCO 2017](https://cocodataset.org/#download) and [ImageNet-1k](https://www.image-net.org/download.php).
+The paper describes the source-domain training data as 5% of COCO and 5% of
+ImageNet. For exact reproduction, however, **do not use a direct download of
+the original ImageNet-1k dataset**. Our training used:
+
+- a 5% subset of [COCO 2017](https://cocodataset.org/#download); and
+- a 5% subset of the training set released by the
+  [Few-Shot Object Detection Dataset (FSOD)](https://github.com/fanq15/Few-Shot-Object-Detection-Dataset),
+  whose images and annotations are available from the
+  [official Google Drive folder](https://drive.google.com/drive/folders/1XXADD7GvW8M_xzgFpHfudYDYtKtDgZGM).
+
+The FSOD release contains the ImageNet-derived training data used in our
+experiments because original ImageNet-1k is only a classification dataset instead of an object detection one.
+
+For the most reliable reproduction, download the released merged training
+annotation directly:
+
+- [merged_one_class_area.json](https://huggingface.co/tangqh/PF-RPN/resolve/main/merged_one_class_area.json)
+
+It already contains the selected 5% COCO and 5% FSOD-release training samples,
+with all categories merged into the single `object` class.
 
 The released config (`configs/pf-rpn/pf-rpn_coco-imagenet.py`) expects:
 
-- `data/coco/train2017/`
-- `data/coco/val2017/`
-- `data/coco/annotations/merged_one_class_area.json`
-- `data/coco/annotations/instances_val2017_sc.json` (or equivalent one-class val JSON)
+```text
+data/coco/
+  train2017/
+    <COCO training images>
+    part_1/
+    part_2/
+  val2017/
+    <COCO validation images>
+  annotations/
+    merged_one_class_area.json
+    instances_val2017_sc.json
+    instances_val2017_1p_sc.json
+```
 
-Released merged train annotation:
-
-- https://huggingface.co/tangqh/PF-RPN/resolve/main/merged_one_class_area.json
+Keep the FSOD image subdirectories (including `part_1/` and `part_2/`) under
+`data/coco/train2017/`. Do not flatten or rename them: the `file_name` entries
+in `merged_one_class_area.json` retain these relative paths, and the training
+config resolves them relative to `data/coco/train2017/`.
 
 Generate one-class annotations from COCO JSON (optional):
+
+> **Note:** The 5% COCO command below only creates a standalone COCO subset.
+> It does not create the final combined COCO+ImageNet training annotation used by
+> the released checkpoint. Use the released `merged_one_class_area.json` for
+> exact reproduction.
 
 ```bash
 # 5% training subset + merge all categories into one class
@@ -186,8 +220,6 @@ python tools/merge_classes_and_sample_subset.py \
 cp data/coco/annotations/instances_val2017_1p_sc.json \
   data/coco/annotations/instances_val2017_sc.json
 ```
-
-For the current release setting, ImageNet images are merged into `data/coco/train2017/`.
 
 ### B) CD-FSOD (6 targets)
 
@@ -348,6 +380,9 @@ Before reporting numbers, verify:
 
 - [ ] Environment matches (`Python 3.10`, `PyTorch 2.1.0`, `CUDA 11.8`)
 - [ ] Checkpoint files are placed in `checkpoints/`
+- [ ] COCO 2017 and the FSOD release ImageNet-derived training data are both downloaded
+- [ ] FSOD image paths such as `part_1/` and `part_2/` are preserved under `data/coco/train2017/`
+- [ ] `merged_one_class_area.json` is placed at the path expected by the training config
 - [ ] One-class annotation JSON files are generated and paths match config files
 - [ ] `custom_classes=('object',)` is preserved
 - [ ] Evaluation uses the provided benchmark-specific configs
@@ -372,3 +407,6 @@ This project is built upon:
 - [GroundingDINO](https://github.com/IDEA-Research/GroundingDINO)
 - [GLIP and ODinW benchmark resources](https://github.com/microsoft/GLIP)
 
+We also thank the FSOD authors for releasing the ImageNet-derived training data used in our experiments. 
+
+- [Few-Shot-Object-Detection-Dataset](https://github.com/fanq15/Few-Shot-Object-Detection-Dataset)
