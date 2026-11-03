@@ -399,6 +399,10 @@ If you find PF-RPN is useful in your research or applications, please consider g
 }
 ```
 
+## ⭐️ Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=tangqh03/PF-RPN&type=Date)](https://star-history.com/#tangqh03/PF-RPN&Date)
+
 ## 🙏 Acknowledgement
 
 This project is built upon:
